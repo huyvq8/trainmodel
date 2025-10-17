@@ -21,6 +21,9 @@ from content_analysis.content_analyzer import ContentAnalyzer
 from script_generation.script_generator import ScriptGenerator
 from video_production.video_producer import VideoProducer
 from video_editing.video_editor import VideoEditor
+from pipeline_manager import PipelineManager, PipelineConfig
+from performance_optimizer import PerformanceOptimizer
+from marketing_optimizer import MarketingOptimizer
 
 # Import config
 from configs.config import (
@@ -45,6 +48,9 @@ class AIVideoMarketingSystem:
         self.script_generator = None
         self.video_producer = None
         self.video_editor = None
+        self.pipeline_manager = None
+        self.performance_optimizer = None
+        self.marketing_optimizer = None
         
         # Initialize components
         self._initialize_components()
@@ -77,6 +83,23 @@ class AIVideoMarketingSystem:
             # Initialize video editor
             self.video_editor = VideoEditor(VIDEO_CONFIG)
             logger.info("✓ Video Editor initialized")
+            
+            # Initialize pipeline manager
+            pipeline_config = {
+                'ai': AI_CONFIG,
+                'trend': TREND_CONFIG,
+                'video': VIDEO_CONFIG
+            }
+            self.pipeline_manager = PipelineManager(pipeline_config)
+            logger.info("✓ Pipeline Manager initialized")
+            
+            # Initialize performance optimizer
+            self.performance_optimizer = PerformanceOptimizer()
+            logger.info("✓ Performance Optimizer initialized")
+            
+            # Initialize marketing optimizer
+            self.marketing_optimizer = MarketingOptimizer(MARKETING_CONFIG)
+            logger.info("✓ Marketing Optimizer initialized")
             
             logger.info("🎉 All components initialized successfully!")
             
@@ -320,11 +343,134 @@ class AIVideoMarketingSystem:
             video_duration=config.get("video_duration", 60),
             output_dir=config.get("output_dir")
         )
+    
+    async def run_async_pipeline(self, 
+                               keywords: List[str],
+                               target_product: str = "",
+                               video_duration: int = 60,
+                               output_dir: Optional[Path] = None) -> Dict[str, Any]:
+        """
+        Chạy pipeline bất đồng bộ để tối ưu hiệu suất
+        
+        Args:
+            keywords: Danh sách từ khóa trending
+            target_product: Sản phẩm mục tiêu
+            video_duration: Thời lượng video (giây)
+            output_dir: Thư mục lưu kết quả
+            
+        Returns:
+            Dict[str, Any]: Kết quả pipeline
+        """
+        if output_dir is None:
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            output_dir = OUTPUTS_DIR / f"async_pipeline_{timestamp}"
+        
+        logger.info("🚀 Starting Async Pipeline...")
+        
+        # Create pipeline config
+        pipeline_config = PipelineConfig(
+            keywords=keywords,
+            target_product=target_product,
+            video_duration=video_duration,
+            output_dir=output_dir
+        )
+        
+        # Run async pipeline
+        return await self.pipeline_manager.run_async_pipeline(pipeline_config)
+    
+    def run_batch_pipeline(self, 
+                          pipeline_configs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Chạy nhiều pipeline song song
+        
+        Args:
+            pipeline_configs: Danh sách cấu hình pipeline
+            
+        Returns:
+            List[Dict[str, Any]]: Kết quả của tất cả pipeline
+        """
+        logger.info(f"🚀 Starting Batch Pipeline with {len(pipeline_configs)} configurations...")
+        
+        # Convert configs to PipelineConfig objects
+        configs = []
+        for config in pipeline_configs:
+            pipeline_config = PipelineConfig(
+                keywords=config.get("keywords", ["demo"]),
+                target_product=config.get("target_product", ""),
+                video_duration=config.get("video_duration", 60),
+                output_dir=config.get("output_dir")
+            )
+            configs.append(pipeline_config)
+        
+        # Run batch pipeline
+        return self.pipeline_manager.run_batch_pipeline(configs)
+    
+    def optimize_system_performance(self) -> Dict[str, Any]:
+        """
+        Tối ưu hóa hiệu suất hệ thống
+        
+        Returns:
+            Dict[str, Any]: Kết quả tối ưu hóa
+        """
+        logger.info("🔧 Optimizing system performance...")
+        
+        # Optimize PyTorch settings
+        self.performance_optimizer.optimize_torch_settings()
+        
+        # Check system health
+        health = self.performance_optimizer.check_system_health()
+        
+        # Get recommendations
+        recommendations = self.performance_optimizer.get_optimization_recommendations()
+        
+        # Save performance report
+        report_file = self.performance_optimizer.save_performance_report(OUTPUTS_DIR / "performance")
+        
+        return {
+            "system_health": health,
+            "recommendations": recommendations,
+            "report_file": str(report_file)
+        }
+    
+    def generate_marketing_strategy(self, 
+                                  video_path: str,
+                                  target_product: str,
+                                  budget: float = 1000) -> Dict[str, Any]:
+        """
+        Tạo chiến lược marketing toàn diện
+        
+        Args:
+            video_path: Đường dẫn video
+            target_product: Sản phẩm mục tiêu
+            budget: Ngân sách marketing
+            
+        Returns:
+            Dict[str, Any]: Chiến lược marketing
+        """
+        logger.info("📊 Generating marketing strategy...")
+        
+        # Analyze video
+        video_analysis = self.marketing_optimizer._analyze_video(video_path)
+        
+        # Generate strategy
+        strategy = self.marketing_optimizer.generate_marketing_strategy(
+            video_analysis, target_product, budget
+        )
+        
+        # Save strategy
+        strategy_file = self.marketing_optimizer.save_marketing_strategy(
+            strategy, OUTPUTS_DIR / "marketing"
+        )
+        
+        return {
+            "strategy": strategy,
+            "strategy_file": str(strategy_file)
+        }
 
 def main():
     """Main function"""
     parser = argparse.ArgumentParser(description="AI Video Marketing System")
-    parser.add_argument("--mode", choices=["demo", "custom", "full"], 
+    parser.add_argument("--mode", choices=["demo", "custom", "full", "async", "batch", "optimize", "marketing"], 
                        default="demo", help="Pipeline mode")
     parser.add_argument("--keywords", nargs="+", 
                        default=["cooking", "tips", "viral"], 
@@ -337,6 +483,11 @@ def main():
                        help="Video duration in seconds")
     parser.add_argument("--output", type=str, 
                        help="Output directory")
+    parser.add_argument("--budget", type=float, 
+                       default=1000, 
+                       help="Marketing budget")
+    parser.add_argument("--video-path", type=str, 
+                       help="Path to video for marketing optimization")
     
     args = parser.parse_args()
     
@@ -367,6 +518,50 @@ def main():
                 target_product=args.product,
                 video_duration=args.duration,
                 output_dir=output_dir
+            )
+            
+        elif args.mode == "async":
+            # Run async pipeline
+            import asyncio
+            output_dir = Path(args.output) if args.output else None
+            results = asyncio.run(system.run_async_pipeline(
+                keywords=args.keywords,
+                target_product=args.product,
+                video_duration=args.duration,
+                output_dir=output_dir
+            ))
+            
+        elif args.mode == "batch":
+            # Run batch pipeline
+            configs = [
+                {
+                    "keywords": args.keywords,
+                    "target_product": args.product,
+                    "video_duration": args.duration,
+                    "output_dir": Path(args.output) / "batch_1" if args.output else None
+                },
+                {
+                    "keywords": [kw + " tips" for kw in args.keywords],
+                    "target_product": args.product + " Advanced",
+                    "video_duration": args.duration + 30,
+                    "output_dir": Path(args.output) / "batch_2" if args.output else None
+                }
+            ]
+            results = system.run_batch_pipeline(configs)
+            
+        elif args.mode == "optimize":
+            # Optimize system performance
+            results = system.optimize_system_performance()
+            
+        elif args.mode == "marketing":
+            # Generate marketing strategy
+            if not args.video_path:
+                print("❌ --video-path is required for marketing mode")
+                sys.exit(1)
+            results = system.generate_marketing_strategy(
+                video_path=args.video_path,
+                target_product=args.product,
+                budget=args.budget
             )
         
         # Print summary
