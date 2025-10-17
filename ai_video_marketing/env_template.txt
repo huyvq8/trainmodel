@@ -1,0 +1,17 @@
+# AI Video Marketing System - Environment Variables
+# Copy this file to .env and fill in your actual API keys
+
+# OpenAI API Key (required for content analysis and script generation)
+OPENAI_API_KEY=your_openai_api_key_here
+
+# YouTube API Key (optional, for trend analysis)
+YOUTUBE_API_KEY=your_youtube_api_key_here
+
+# TikTok API Key (optional, for trend analysis)
+TIKTOK_API_KEY=your_tiktok_api_key_here
+
+# Other settings
+LOG_LEVEL=INFO
+MAX_VIDEOS_PER_KEYWORD=50
+DEFAULT_VIDEO_DURATION=60
+
