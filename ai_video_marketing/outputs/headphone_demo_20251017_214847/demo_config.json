@@ -1,0 +1,56 @@
+{
+  "model_config": {
+    "gender": "male",
+    "age": "young adult",
+    "ethnicity": "asian",
+    "style": "professional",
+    "setting": "studio",
+    "clothing": "casual smart"
+  },
+  "keywords": [
+    "wireless headphones",
+    "bluetooth earbuds",
+    "noise cancelling",
+    "premium audio",
+    "tech review"
+  ],
+  "script": {
+    "product": "Premium Wireless Headphones - Model X1",
+    "duration": 75,
+    "model_description": "Nam chau A, da trang, mat den, toc den, 25 tuoi",
+    "sections": {
+      "hook": {
+        "dialogue": "Ban co biet tai sao nhung nguoi thanh cong luon deo tai nghe cao cap khong?",
+        "visual": "Close-up tai nghe tren tai nguoi mau nam chau A",
+        "timing": "0-5s"
+      },
+      "introduction": {
+        "dialogue": "Hom nay toi se review tai nghe Model X1 - san pham dang lam mua lam gio tren thi truong!",
+        "visual": "Nguoi mau cam tai nghe, gioi thieu san pham",
+        "timing": "5-15s"
+      },
+      "features": {
+        "dialogue": "Diem noi bat: am thanh cuc ky trong treo voi cong nghe noise cancelling tien tien",
+        "visual": "Nguoi mau deo tai nghe, bieu cam hai long",
+        "timing": "15-30s"
+      },
+      "design": {
+        "dialogue": "Thiet ke sang trong, deo ca ngay khong moi tai, pin 30 gio su dung lien tuc",
+        "visual": "Close-up thiet ke tai nghe, nguoi mau trong tu the thoai mai",
+        "timing": "30-45s"
+      },
+      "connectivity": {
+        "dialogue": "Ket noi Bluetooth 5.0 sieu nhanh, tuong thich moi thiet bi, gia chi 2.5 trieu",
+        "visual": "Nguoi mau ket noi voi dien thoai, su dung tai nghe",
+        "timing": "45-60s"
+      },
+      "call_to_action": {
+        "dialogue": "Dat hang ngay hom nay de duoc giam 20% va tang kem case bao ve cao cap!",
+        "visual": "Nguoi mau chi tay ve phia camera, hien thi link mua hang",
+        "timing": "60-75s"
+      }
+    }
+  },
+  "output_dir": "outputs\\headphone_demo_20251017_214847",
+  "created_at": "2025-10-17T21:48:47.400525"
+}

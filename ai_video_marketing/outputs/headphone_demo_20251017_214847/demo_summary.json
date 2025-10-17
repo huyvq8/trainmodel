@@ -1,0 +1,70 @@
+{
+  "config_file": "outputs\\headphone_demo_20251017_214847\\demo_config.json",
+  "output_dir": "outputs\\headphone_demo_20251017_214847",
+  "model_prompts": [
+    "Asian male model, 25 years old, black hair, dark eyes, fair skin, wearing wireless headphones, professional studio photography, clean background, modern tech aesthetic, confident expression",
+    "Young Asian man, black hair, dark eyes, light skin tone, wearing premium wireless earbuds, tech lifestyle photography, minimalist style, natural lighting",
+    "Asian male, early 20s, black hair, dark eyes, wearing noise-cancelling headphones, casual pose, modern lifestyle, clean studio lighting, professional headshot",
+    "Handsome Asian man, black hair, dark eyes, fair complexion, wearing high-end wireless headphones, studio portrait, tech product photography, commercial style"
+  ],
+  "marketing_strategy": {
+    "target_audience": "Nam 18-35 tuoi, quan tam den cong nghe, thu nhap trung binh tro len",
+    "platforms": {
+      "youtube": {
+        "duration": "75 giay",
+        "resolution": "1920x1080",
+        "hashtags": [
+          "#tai nghe",
+          "#wireless",
+          "#bluetooth",
+          "#tech review",
+          "#premium audio"
+        ],
+        "posting_time": "20:00-22:00"
+      },
+      "tiktok": {
+        "duration": "30 giay",
+        "resolution": "1080x1920",
+        "hashtags": [
+          "#tai nghe",
+          "#wireless",
+          "#tech",
+          "#fyp",
+          "#viral"
+        ],
+        "posting_time": "18:00-21:00"
+      },
+      "instagram": {
+        "duration": "60 giay",
+        "resolution": "1080x1080",
+        "hashtags": [
+          "#tai nghe",
+          "#wireless",
+          "#tech",
+          "#lifestyle",
+          "#premium"
+        ],
+        "posting_time": "19:00-21:00"
+      }
+    },
+    "budget_allocation": {
+      "youtube_ads": 600,
+      "tiktok_ads": 450,
+      "instagram_ads": 300,
+      "production": 150
+    },
+    "success_metrics": {
+      "views": 50000,
+      "engagement_rate": 0.05,
+      "conversion_rate": 0.02,
+      "cost_per_acquisition": 50
+    }
+  },
+  "ai_commands": {
+    "install_dependencies": "pip install torch torchvision transformers diffusers opencv-python moviepy",
+    "run_demo": "python main.py --mode demo --keywords 'wireless headphones' 'bluetooth earbuds' --product 'Premium Wireless Headphones' --duration 75",
+    "run_async": "python main.py --mode async --keywords 'wireless headphones' 'premium audio' --product 'Model X1 Headphones' --duration 60",
+    "run_custom": "python main.py --mode custom --keywords 'noise cancelling' 'tech review' --product 'Premium Wireless Headphones' --duration 75 --output ./headphone_output"
+  },
+  "created_at": "2025-10-17T21:48:47.401497"
+}

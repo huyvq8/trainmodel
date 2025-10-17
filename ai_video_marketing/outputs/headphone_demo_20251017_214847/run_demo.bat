@@ -1,0 +1,6 @@
+@echo off
+echo Installing dependencies...
+pip install torch torchvision transformers diffusers opencv-python moviepy
+echo Running headphone demo...
+python main.py --mode demo --keywords 'wireless headphones' 'bluetooth earbuds' --product 'Premium Wireless Headphones' --duration 75
+pause
